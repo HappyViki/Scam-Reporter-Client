@@ -13,10 +13,10 @@ scamList.innerHTML = dummyData.map(
 async function addScamItem() {
   // 1. Gather input values from the HTML form
   const inputScam = {
-    ScamDescription: document.getElementById('ScamDescription').value,
-    PhoneNumber: document.getElementById('PhoneNumber').value,
-    EmailAddress: document.getElementById('EmailAddress').value,
-    Website: document.getElementById('Website').value
+    ScamDescription: document.getElementById('description').value,
+    PhoneNumber: document.getElementById('scamPhone').value,
+    EmailAddress: document.getElementById('scamEmail').value,
+    Website: document.getElementById('scamWebsite').value
   };
 
   // 2. Validate mandatory fields before sending (optional but recommended)
