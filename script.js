@@ -1,3 +1,5 @@
+const scamListApiUrl = "https://scam-reporter-api-production.up.railway.app/";
+
 scamList.innerHTML = dummyData.map(
     ({description, scamPhone, scamEmail, scamWebsite}) => {
         const phoneText = scamPhone ? `<div>Phone: ${scamPhone}</div>` : '';
@@ -25,7 +27,7 @@ async function addScamItem() {
 
   try {
     // 3. Send the POST request to the server
-    const response = await fetch('/scamitems', {
+    const response = await fetch(scamListApiUrl + 'scamitems', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -50,7 +52,12 @@ async function addScamItem() {
 
 async function getScamItems() {
   try {
-    const response = await fetch('/scamitems');
+    const response = await fetch(scamListApiUrl + 'scamitems', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
     
     // Check if the network response was successful (status 200-299)
     if (!response.ok) {
