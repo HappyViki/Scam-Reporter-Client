@@ -68,9 +68,9 @@ async function getScamItems() {
     console.log(data);
     scamList.innerHTML = data.map(
         ({scamDescription, phoneNumber, emailAddress, website}) => {
-            const phoneText = PhoneNumber ? `<div>Phone: ${phoneNumber}</div>` : '';
-            const emailText = EmailAddress ? `<div>Email: ${emailAddress}</div>` : '';
-            const websiteText = Website ? `<div>Website: ${website}</div>` : '';
+            const phoneText = phoneNumber ? `<div>Phone: ${phoneNumber}</div>` : '';
+            const emailText = emailAddress ? `<div>Email: ${emailAddress}</div>` : '';
+            const websiteText = website ? `<div>Website: ${website}</div>` : '';
 
             return `<div class="scamItem"><div style="margin-bottom:8px">${scamDescription}</div><div>${phoneText}<br/>${emailText}<br/>${websiteText}</div></div>`;
         }
