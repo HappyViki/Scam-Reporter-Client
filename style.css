@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+
+    background-color: #080b18;
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADINGS */
+
+h1, h2, h3 {
+    max-width: 650px;
+    margin: 45px auto 15px;
+    color: #a66fb5;
+}
+
+h1 {
+    margin: 0 auto 30px;
+    text-align: center;
+}
+
+/* FORM */
+
+form {
+    max-width: 650px;
+    margin: 0 auto;
+
+    padding: 25px;
+
+    background-color: #101936;
+
+    border-radius: 6px;
+
+    box-shadow: 0 5px 15px #000;
+}
+
+form div {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #a66fb5;
+
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+
+    padding: 10px;
+
+    background-color: #e5d6ed;
+    color: #000;
+
+    border: 1px solid #4169e1;
+    border-radius: 3px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+
+    outline: none;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #a66fb5;
+    box-shadow: 0 0 5px #a66fb5;
+}
+
+textarea {
+    height: 110px;
+    resize: vertical;
+}
+
+/* BUTTON */
+
+.submit-button {
+    margin-top: 5px;
+
+    padding: 10px 18px;
+
+    background-color: #a66fb5;
+    color: 101936;
+
+    border: none;
+    border-radius: 3px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #6fb571;
+}
+
+/* SCAM LIST */
+
+#scamList {
+    max-width: 650px;
+    min-height: 100px;
+
+    margin: 0 auto;
+    padding: 20px;
+
+    background-color: #101936;
+
+    border-radius: 6px;
+
+    box-shadow: 0 5px 15px #000;
+}
+
+/* SCAM ITEMS */
+
+#scamList > div {
+    margin-bottom: 12px;
+    padding: 12px;
+
+    background-color: #080b18;
+
+    border-left: 3px solid #a66fb5;
+}
+
+#scamList > div:last-child {
+    margin-bottom: 0;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    body {
+        padding: 25px 12px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    form,
+    #scamList {
+        width: 100%;
+    }
+}

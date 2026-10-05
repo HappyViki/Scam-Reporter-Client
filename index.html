@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scam Reporter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Scam Reporter</h1>
+
+    <form id="scamForm">
+        <h2>Scam Details</h2>
+        <div>
+            <label for="description">Description</label>
+            <textarea name="description"></textarea>
+        </div>
+
+        <div>
+            <label for="scamPhone">Phone</label>
+            <input type="text" name="scamPhone" id="scamPhone">
+        </div>
+        <div>
+            <label for="scamEmail">Email</label>
+            <input type="text" name="scamEmail" id="scamEmail">
+        </div>
+        <div>
+            <label for="scamWebsite">Website</label>
+            <input type="text" name="scamWebsite" id="scamWebsite">
+        </div>
+
+        <button class="submit-button" type="button" onclick="addScamItem()">Submit Scam!</button>
+    </form>
+
+    <h2>Current Scams</h2>
+
+    <form action="">
+        <label for="searchText">Search Bar</label>
+        <input type="text" name="searchText" id="searchText">
+    </form>
+
+    <h3>Recently submitted show up first. Pagination, coming soon.</h3>
+
+    <div id="scamList"></div>
+    <script src="dummyData.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
