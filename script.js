@@ -88,6 +88,8 @@ async function addScamItem() {
   }
 }
 
+/* Old code, may want later */
+/*
 async function getScamItems() {
   try {
     const response = await fetch(scamListApiUrl + 'scamitems', {
@@ -118,11 +120,8 @@ async function getScamItems() {
     console.error('Error fetching scam items:', error);
   }
 }
+*/
 
-
-
-//XSS security fix for getScamItems() (delete current entry on Railway that contains the "image"):
-/*
 async function getScamItems() {
   try {
     const response = await fetch(scamListApiUrl + 'scamitems', {
@@ -175,7 +174,7 @@ async function getScamItems() {
     console.error('Error fetching scam items:', error);
   }
 }
-*/
+
 
 
 // Display scams
