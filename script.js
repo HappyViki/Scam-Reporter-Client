@@ -6,7 +6,7 @@ scamList.innerHTML = dummyData.map( //this will be deleted
         const emailText = scamEmail ? `<div>Email: ${scamEmail}</div>` : '';
         const websiteText = scamWebsite ? `<div>Website: ${scamWebsite}</div>` : '';
 
-        return `<div class="scamItem">${description}</div><div>${phoneText} ${emailText} ${websiteText}</div>`;
+        return `<div class="scamItem"><div style="margin-bottom:8px">${description}</div><div>${phoneText} ${emailText} ${websiteText}</div></div>`;
     }
 ).join('');
 
