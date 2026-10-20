@@ -1,12 +1,12 @@
 const scamListApiUrl = "https://scam-reporter-api-production.up.railway.app/";
 
-scamList.innerHTML = dummyData.map(
+scamList.innerHTML = dummyData.map( //this will be deleted
     ({description, scamPhone, scamEmail, scamWebsite}) => {
         const phoneText = scamPhone ? `<div>Phone: ${scamPhone}</div>` : '';
         const emailText = scamEmail ? `<div>Email: ${scamEmail}</div>` : '';
         const websiteText = scamWebsite ? `<div>Website: ${scamWebsite}</div>` : '';
 
-        return `<div class="scamItem"><div style="margin-bottom:8px">${description}</div><div>${phoneText} ${emailText} ${websiteText}</div></div>`;
+        return `<div class="scamItem">${description}</div><div>${phoneText} ${emailText} ${websiteText}</div>`;
     }
 ).join('');
 
@@ -69,7 +69,8 @@ async function addScamItem() {
       const result = await response.json();
       alert('Scam item added successfully!');
       document.getElementById('scamForm').reset(); // Clear form after success
-      //getScamItems()
+      getScamItems()
+
     } else { //error handling
       const contentType = response.headers.get("content-type");
       let errorMsg = response.statusText;
@@ -87,6 +88,9 @@ async function addScamItem() {
     alert('A network error occurred. Please try again.');
   }
 }
+
+document.getElementById('submitScam').addEventListener('click', addScamItem);
+
 
 /* Old code, may want later */
 /*
@@ -138,7 +142,6 @@ async function getScamItems() {
 
     const data = await response.json();
     console.log(data);
-    scamList.innerHTML = '';
 
     data.forEach(({scamDescription, phoneNumber, emailAddress, website}) => {
       const item = document.createElement('div');
