@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://scam-reporter-api-production.up.railway.app; base-uri 'none'; form-action 'self'">
     <title>Scam Reporter</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -29,7 +30,8 @@
             <input type="text" name="scamWebsite" id="scamWebsite">
         </div>
 
-        <button class="submit-button" type="button" onclick="addScamItem()">Submit Scam!</button>
+        <!-- <button class="submit-button" type="button" onclick="addScamItem()">Submit Scam!</button> -->
+        <button class="submit-button" id="submitScam" type="button">Submit Scam!</button> <!-- handled in script.js-->
     </form>
 
     <h2>Current Scams</h2>
