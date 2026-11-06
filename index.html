@@ -3,46 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scam Reporter</title>
+    <title>CyberScams</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Scam Reporter</h1>
+    <div class="container">
+        <h1>CyberScams</h1>
 
-    <form id="scamForm">
-        <h2>Scam Details</h2>
-        <div>
-            <label for="description">Description</label>
-            <textarea name="description" id="description"></textarea>
+        <form id="scamForm">
+            <h2>Report It!</h2>
+
+            <div class="form-control">
+                <label for="scamDesc">Description</label>
+                <textarea name="scamDesc" id="scamDesc" rows="10"></textarea>
+            </div>
+            <div class="form-control">
+                <label for="scamTel">Phone</label>
+                <input type="tel" name="scamTel" id="scamTel">
+            </div>
+            <div class="form-control">
+                <label for="scamEmail">Email</label>
+                <input type="email" name="scamEmail" id="scamEmail">
+            </div>
+            <div class="form-control">
+                <label for="scamSite">Website</label>
+                <input type="text" name="scamSite" id="scamSite">
+            </div>
+            <button class="submit-button">Submit</button>
+        </form>
+
+        <div id="searchContainer">
+            <form id="searchForm">
+                <div class="form-control search-bar">
+                    <label for="searchBar">Search</label>
+                    <input type="search" name="searchBar" id="searchBar">
+                </div>
+            </form>
+            <div id="scamList"></div>
         </div>
+    </div>
 
-        <div>
-            <label for="scamPhone">Phone</label>
-            <input type="text" name="scamPhone" id="scamPhone">
-        </div>
-        <div>
-            <label for="scamEmail">Email</label>
-            <input type="text" name="scamEmail" id="scamEmail">
-        </div>
-        <div>
-            <label for="scamWebsite">Website</label>
-            <input type="text" name="scamWebsite" id="scamWebsite">
-        </div>
-
-        <button class="submit-button" type="button" onclick="addScamItem()">Submit Scam!</button>
-    </form>
-
-    <h2>Current Scams</h2>
-
-    <form action="">
-        <label for="searchText">Search Bar</label>
-        <input type="text" name="searchText" id="searchText">
-    </form>
-
-    <h3>Recently submitted show up first. Pagination, coming soon.</h3>
-
-    <div id="scamList"></div>
     <script src="dummyData.js"></script>
+    <script src="Card.js"></script>
+    <script>
+        for (scam of scams) {
+            scamList.innerHTML += Card(scam);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

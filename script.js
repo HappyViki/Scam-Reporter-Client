@@ -1,24 +1,13 @@
 const scamListApiUrl = "https://scam-reporter-api-production.up.railway.app/";
 
-scamList.innerHTML = dummyData.map(
-    ({description, scamPhone, scamEmail, scamWebsite}) => {
-        const phoneText = scamPhone ? `<div>Phone: ${scamPhone}</div>` : '';
-        const emailText = scamEmail ? `<div>Email: ${scamEmail}</div>` : '';
-        const websiteText = scamWebsite ? `<div>Website: ${scamWebsite}</div>` : '';
-
-        return `<div class="scamItem"><div style="margin-bottom:8px">${description}</div><div>${phoneText} ${emailText} ${websiteText}</div></div>`;
-    }
-).join('');
-
 async function addScamItem() {
   // 1. Gather input values from the HTML form
   const inputScam = {
-    ScamDescription: document.getElementById('description').value.trim(),
-    PhoneNumber: document.getElementById('scamPhone').value.trim(),
+    ScamDescription: document.getElementById('scamDesc').value.trim(),
+    PhoneNumber: document.getElementById('scamTel').value.trim(),
     EmailAddress: document.getElementById('scamEmail').value.trim(),
-    Website: document.getElementById('scamWebsite').value.trim()
+    Website: document.getElementById('scamSite').value.trim()
   };
-
 
   // 2. Validate mandatory fields before sending (optional but recommended)
   if (!inputScam.ScamDescription) {
