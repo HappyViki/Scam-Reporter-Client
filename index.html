@@ -16,19 +16,19 @@
 
             <div class="form-control">
                 <label for="scamDesc">Description</label>
-                <textarea name="scamDesc" id="scamDesc" rows="10"></textarea>
+                <textarea name="scamDesc" id="scamDesc" placeholder="Enter scam details here..." rows="10"></textarea>
             </div>
             <div class="form-control">
                 <label for="scamTel">Phone</label>
-                <input type="tel" name="scamTel" id="scamTel">
+                <input type="tel" name="scamTel" id="scamTel" placeholder="e.g. 000-000-0000">
             </div>
             <div class="form-control">
                 <label for="scamEmail">Email</label>
-                <input type="email" name="scamEmail" id="scamEmail">
+                <input type="email" name="scamEmail" id="scamEmail" placeholder="name@example.com">
             </div>
             <div class="form-control">
                 <label for="scamSite">Website</label>
-                <input type="text" name="scamSite" id="scamSite">
+                <input type="text" name="scamSite" id="scamSite" placeholder="https://example.com">
             </div>
             <button class="submit-button">Submit</button>
         </form>
@@ -37,12 +37,20 @@
             <form id="searchForm">
                 <div class="form-control search-bar">
                     <label for="searchBar">Search</label>
-                    <input type="search" name="searchBar" id="searchBar">
+                    <input type="search" name="searchBar" id="searchBar" placeholder="Search scams...">
                 </div>
             </form>
             <div id="scamList"></div>
         </div>
     </div>
+
+    
+    <div id="paginationControls" style="margin: 10px 0;">
+        <button id="prevPage" onclick="changePage(-1)" type="button">Previous</button>
+        <span id="pageInfo">Page 1 of 1</span>
+        <button id="nextPage" onclick="changePage(1)" type="button">Next</button>
+    </div>
+
 
     <script src="dummyData.js"></script>
     <script src="Card.js"></script>
@@ -51,6 +59,7 @@
             scamList.innerHTML += Card(scam);
         }
     </script>
+
     <script src="script.js"></script>
 </body>
 </html>

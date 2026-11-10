@@ -51,3 +51,11 @@ h1{
 .scam-item__label{
     font-weight: bold;
 }
+#paginationControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    width: 100%;
+}

@@ -1,5 +1,11 @@
 const scamListApiUrl = "https://scam-reporter-api-production.up.railway.app/";
 
+let allScams = [];
+let currentPage = 1;
+const pageSize = 10;
+let searchQuery = '';
+
+
 async function addScamItem() {
   // 1. Gather input values from the HTML form
   const inputScam = {
@@ -81,39 +87,6 @@ async function addScamItem() {
 document.getElementById('submitScam').addEventListener('click', addScamItem);
 
 
-/* Old code, may want later */
-/*
-async function getScamItems() {
-  try {
-    const response = await fetch(scamListApiUrl + 'scamitems', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-    
-    // Check if the network response was successful (status 200-299)
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    console.log(data);
-    scamList.innerHTML = data.map(
-        ({scamDescription, phoneNumber, emailAddress, website}) => {
-            const phoneText = phoneNumber ? `<div>Phone: ${phoneNumber}</div>` : '';
-            const emailText = emailAddress ? `<div>Email: ${emailAddress}</div>` : '';
-            const websiteText = website ? `<div>Website: ${website}</div>` : '';
-
-            return `<div class="scamItem"><div style="margin-bottom:8px">${scamDescription}</div><div>${phoneText}<br/>${emailText}<br/>${websiteText}</div></div>`;
-        }
-    ).join('');
-    return data;
-  } catch (error) {
-    console.error('Error fetching scam items:', error);
-  }
-}
-*/
 
 async function getScamItems() {
   try {
@@ -129,43 +102,113 @@ async function getScamItems() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log(data);
-
-    data.forEach(({scamDescription, phoneNumber, emailAddress, website}) => {
-      const item = document.createElement('div');
-      item.className = 'scamItem';
-
-      const desc = document.createElement('div');
-      desc.style.marginBottom = '8px';
-      desc.textContent = scamDescription || ''; //description will be required
-      item.appendChild(desc);
-
-      const contactInfo = document.createElement('div');
-      if (phoneNumber) {
-        const phone = document.createElement('div');
-        phone.textContent = `Phone: ${phoneNumber}`;
-        contactInfo.appendChild(phone);
-      }
-      if (emailAddress) {
-        const email = document.createElement('div');
-        email.textContent = `Email: ${emailAddress}`;
-        contactInfo.appendChild(email);
-      }
-      if (website) {
-        const site = document.createElement('div');
-        site.textContent = `Website: ${website}`;
-        contactInfo.appendChild(site);
-      }
-      item.appendChild(contactInfo);
-      scamList.appendChild(item);
-    });
-    return data;
-
+    allScams = await response.json();
+    console.log(allScams);
+    renderScams();
+    return allScams;
+    
   } catch (error) {
     console.error('Error fetching scam items:', error);
   }
 }
+
+
+//getScamItems helper
+function renderScams() {
+  scamList.innerHTML = '';
+
+  const filteredScams = getFilteredScams();
+
+  const totalPages = Math.ceil(filteredScams.length / pageSize) || 1;
+
+  //page bounds check
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+  if (currentPage < 1) {
+    currentPage = 1;
+  }
+  
+  //slice scam items for current page (10 per page rn)
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedScams = filteredScams.slice(startIndex, startIndex + pageSize);
+
+  //update pagination controls
+  document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+  document.getElementById('prevPage').disabled = currentPage === 1;
+  document.getElementById('nextPage').disabled = currentPage >= totalPages;
+
+  if (paginatedScams.length === 0) {
+    const emptyMsg = document.createElement('div');
+    emptyMsg.textContent = `No scams match your search query.`;
+    scamList.appendChild(emptyMsg);
+    return;
+  }
+
+  //render scam items
+  paginatedScams.forEach(({scamDescription, phoneNumber, emailAddress, website}) => {
+    const item = document.createElement('div');
+    item.className = 'scamItem';
+
+    const desc = document.createElement('div');
+    desc.style.marginBottom = '8px';
+    desc.textContent = scamDescription || ''; //description will be required
+    item.appendChild(desc);
+
+    const contactInfo = document.createElement('div');
+    if (phoneNumber) {
+      const phone = document.createElement('div');
+      phone.textContent = `Phone: ${phoneNumber}`;
+      contactInfo.appendChild(phone);
+    }
+    if (emailAddress) {
+      const email = document.createElement('div');
+      email.textContent = `Email: ${emailAddress}`;
+      contactInfo.appendChild(email);
+    }
+    if (website) {
+      const site = document.createElement('div');
+      site.textContent = `Website: ${website}`;
+      contactInfo.appendChild(site);
+    }
+    item.appendChild(contactInfo);
+    scamList.appendChild(item);
+  });
+}
+
+//filter scams based on search query across all fields
+function getFilteredScams() {
+  if (!searchQuery) return allScams;
+  return allScams.filter(scam => 
+    (scam.scamDescription && scam.scamDescription.toLowerCase().includes(searchQuery)) ||
+    (scam.phoneNumber && scam.phoneNumber.toLowerCase().includes(searchQuery)) ||
+    (scam.emailAddress && scam.emailAddress.toLowerCase().includes(searchQuery)) ||
+    (scam.website && scam.website.toLowerCase().includes(searchQuery))
+  );
+}
+
+
+function changePage(direction) {
+  const filteredScams = getFilteredScams();
+  const totalPages = Math.ceil(filteredScams.length / pageSize) || 1;
+
+  currentPage += direction;
+  if (currentPage < 1) { 
+    currentPage = 1;
+  }
+  if (currentPage > totalPages) {
+    currentPage = totalPages;
+  }
+  renderScams();
+}
+
+
+//search listener
+document.getElementById('searchText').addEventListener('input', (e) => {
+  searchQuery = e.target.value.trim().toLowerCase();
+  currentPage = 1; //reset to first page on search
+  renderScams();
+});
 
 
 
